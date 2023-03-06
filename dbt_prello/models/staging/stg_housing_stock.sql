@@ -1,0 +1,10 @@
+SELECT
+    municipality_code,
+    year,
+    nb_principal_home,
+    nb_second_home,
+    nb_vacants_housing,
+    nb_tot_housing,
+    country_code
+FROM
+    prello_project.housing_stock

@@ -1,0 +1,16 @@
+SELECT
+    sales_date,
+    sales_amount,
+    street_number,
+    street_code,
+    street_name,
+    nom_commune,
+    municipality_code,
+    premise_type,
+    surface,
+    number_of_principal_rooms,
+    sales_price_m2,
+    latitude,
+    longitude
+FROM
+    prello_project.notary_real_estate_sales
