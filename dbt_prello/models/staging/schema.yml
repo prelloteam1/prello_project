@@ -178,3 +178,112 @@ models:
       - name: country_code
         tests:
           - not_null
+  
+  - name: stg_notary_real_estate_sales
+    description : Table containing raw information about date of sales, amount of sales, type of real estate, it's location and municipality
+    columns:
+      - name: primary_key
+        description: concatenation of date of sale and it geographic coordinates (latitutde and longitude)
+        tests:
+          - unique
+          - not_null
+      - name: sales_date
+        description: date of the sale of the real estate
+        tests:
+          - unique
+          - not_null
+      - name: street_number
+        description: number of the street of the real estate
+      - name: street_code
+        description: tbd
+        tests:
+          - unique
+          - not_null
+      - name: street_name
+        description: name of the street of the real estate
+      - name: nom_commune
+        description: name of the city of the real estate
+      - name: municipality_code
+        description: postal code of the city
+        tests:
+          - not_null
+      - name: premise_type
+        description: type of real estate (house or appartment...)
+        tests:
+          - not_null  
+      - name: surface
+        description: surface in squarred meter of the real estate
+        tests:
+          - not_null
+      - name: number_of_principal_rooms
+        description: number of room(s) in the real estate
+        tests:
+          - not_null
+      - name: sales_price_m2
+        description: price of sale per surface
+        tests:
+          - not_null
+      - name: latitude
+        description: geographical coordinate
+        tests:
+          - unique
+          - not_null
+      - name: longitude
+        description: geographical coordinate
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_real_estate_info_by_municipality
+    description : Table containing raw information about intensity tension of municipality, amount of rental med, minimum & maximum amount of rental per municipality
+    columns:
+      - name: municipality_code
+        description: unique id of each municipality in France
+        tests:
+          - unique
+          - not_null
+
+      - name: intensite_tension_immo
+        description: housing stress indice : indicator of balance of rental in the municipality. Higher it is, harder it is to find a rental for people.
+        tests:
+          - not_null
+
+      - name: rental_max_apartment
+        description: rental apartment maximum price per square meter
+        tests:
+          - not_null
+
+      - name: rental_min_apartment
+        description: rental apartment minimum price per square meter
+        tests:
+          - not_null
+
+      - name: rental_med_house
+        description: rental house median price per square meter
+        tests:
+          - not_null
+
+      - name: rental_max_house
+        description: rental house maximum price per square meter
+        tests:
+          - not_null
+
+      - name: rental_min_house
+        description: rental house minimum price per square meter
+        tests:
+          - not_null
+
+      - name: rental_med_all
+        description: rental median price per square meter
+        tests:
+          - not_null
+
+      - name: rental_max_all
+        description: rental maximum price per square meter
+        tests:
+          - not_null
+
+      - name: rental_min_all
+        description: rental minimum price per square meter
+        tests:
+          - not_null
