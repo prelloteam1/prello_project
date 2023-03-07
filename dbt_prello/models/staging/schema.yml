@@ -1,7 +1,6 @@
 version: 2
 
 models:
-<<<<<<< HEAD
 
   - name: stg_POI_touristic_sites_by_municipality
     description : Table containing raw information about tourstic sites 
@@ -88,8 +87,8 @@ models:
       - name: department_name
         tests : 
           - not_null 
-=======
-  - name: POI_tourist_establishments
+
+  - name: stg_POI_tourist_establishments
     description: Etablissements de vacances (Pierre&Vacances, Club Med…) avec leurs coordonnées géographique et importance
     columns: 
       - name: geographic_id
@@ -123,7 +122,7 @@ models:
         tests:
           - not_null
 
-  - name: average_salary_by_municipality
+  - name: stg_average_salary_by_municipality
     columns:
       - name: municipality_year_id
         description: Primary key
@@ -143,7 +142,7 @@ models:
         tests:
           - not_null
 
-  - name: housing_stock
+  - name: stg_housing_stock
     description: Evolution of nb of principal, secondary and vacant houses by municipality and year (over 50 years, every 7-8 years)
     columns:
       - name: municipality_year_id
@@ -173,4 +172,4 @@ models:
       - name: country_code
         tests:
           - not_null        
->>>>>>> 6ebd5fb572f0b133474e2a05934036075a0a47db
+
