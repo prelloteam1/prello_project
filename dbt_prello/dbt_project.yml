@@ -35,8 +35,4 @@ models:
   my_new_project:
       materialized: table
       staging:
-<<<<<<< HEAD
         schema: 'staging'
-=======
-        schema: 'staging'
->>>>>>> 6ebd5fb572f0b133474e2a05934036075a0a47db
