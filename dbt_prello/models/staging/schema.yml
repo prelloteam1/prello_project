@@ -190,14 +190,12 @@ models:
       - name: sales_date
         description: date of the sale of the real estate
         tests:
-          - unique
           - not_null
       - name: street_number
         description: number of the street of the real estate
       - name: street_code
         description: tbd
         tests:
-          - unique
           - not_null
       - name: street_name
         description: name of the street of the real estate
@@ -226,10 +224,8 @@ models:
       - name: latitude
         description: geographical coordinate
         tests:
-          - unique
           - not_null
       - name: longitude
         description: geographical coordinate
         tests:
-          - unique
           - not_null
