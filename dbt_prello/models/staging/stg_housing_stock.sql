@@ -1,5 +1,5 @@
 SELECT
-    CONCAT(municipality_code,"-", year) AS municipality_year_id,
+    CONCAT(municipality_code,"-", housing_stock.year) AS municipality_year_id,
     municipality_code,
     year AS year_year,
     nb_principal_home,
