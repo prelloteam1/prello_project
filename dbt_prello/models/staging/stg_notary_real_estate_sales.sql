@@ -1,20 +1,20 @@
-{{ config(
-    materialized='table'
-)}}
-
--- Identify duplicates rows
-WITH uniques AS (select distinct
-    concat(sales_date, "_", latitude, "_", longitude) as primary_key
-from prello_project.notary_real_estate_sales), 
+WITH uniques AS (
+select distinct
+    concat(sales_date, "_", latitude, "_", longitude,"_",sales_price_m2) as primary_key
+from 
+    prello_project.notary_real_estate_sales
+), 
 
 bases AS (
 SELECT 
-concat(sales_date, "_", latitude, "_", longitude) as primary_key,
-* 
-from prello_project.notary_real_estate_sales )
+    concat(sales_date, "_", latitude, "_", longitude,"_",sales_price_m2) as primary_key,
+    * 
+from 
+    prello_project.notary_real_estate_sales
+)
 
 SELECT 
-    uniques.primary_key,
+    uniques.primary_key as primary_key,
     sales_date,
     sales_amount,
     street_number,
@@ -29,5 +29,8 @@ SELECT
     latitude,
     longitude
 
-FROM uniques
-left join bases ON  uniques.primary_key = bases.primary_key
+FROM 
+    bases
+    RIGHT JOIN uniques ON  uniques.primary_key = bases.primary_key
+WHERE 
+    uniques.primary_key IS NOT NULL
