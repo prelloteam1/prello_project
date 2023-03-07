@@ -1,0 +1,180 @@
+version: 2
+
+models:
+
+  - name: stg_POI_touristic_sites_by_municipality
+    description : Table containing raw information about tourstic sites 
+    columns:
+      - name: geographic_id
+        description : Primary key of the table / concatenation of latitude & longitude 
+        tests : 
+          - not_null 
+          - unique 
+      - name: poi
+        description : >
+          Type of establishments could be: 
+          An integer 1 / 2 (need further investigation)
+          Or a string hotel / casino / beach / etc.. 
+        tests : 
+          - not_null 
+      - name: name 
+        tests : 
+          - not_null 
+      - name: municipality_code
+        tests : 
+          - not_null 
+      - name: importance
+        description : a metric that translate the importance of specific touristic site 
+        tests : 
+          - not_null 
+      - name: name_reprocessed
+        tests : 
+          - not_null 
+
+  - name: stg_geographical_referential
+    description : Table containing raw information about cities, municipality and inter-municipality   
+    columns:
+      - name: municipality_code
+        description : Primary key of the table / Correspond to the postal code  
+        tests : 
+          - not_null 
+          - unique
+      - name: city_name
+        tests : 
+          - not_null 
+      - name: city_name_normalized
+        tests : 
+          - not_null 
+      - name: municipality_type
+        description : >
+          Either:
+          Municipality
+          Arrondissement 
+        tests : 
+          - not_null 
+      - name: latitude
+        tests : 
+          - not_null 
+      - name: longitude
+        tests : 
+          - not_null 
+      - name: epci_code
+        description : >
+          Code that correspond to the agglomeration in which the municipality is located 
+          EPCI_code is null for cities with arrondissement / also null for island (l'ile d'YEU)
+      - name: department_code
+        description : casted as float (1 correspond to the department 01) 
+        tests : 
+          - not_null
+      - name: country_code
+        tests : 
+          - not_null 
+      - name: department_name
+        tests : 
+          - not_null 
+
+  - name: stg_POI_tourist_establishments
+    description: Etablissements de vacances (Pierre&Vacances, Club Med…) avec leurs coordonnées géographique et importance
+    columns: 
+      - name: geographic_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: poi
+        description: Type of establishments
+        tests:
+          - not_null
+      - name: name
+        description: Name of the establishments
+        tests:
+          - not_null
+      - name: latitude 
+        tests:
+          - not_null
+      - name: longitude
+        tests:
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: importance
+        description: To define
+        tests:
+          - not_null
+      - name: name_reprocessed
+        description: Column name reprocessed with lower and without the poi
+        tests:
+          - not_null
+
+  - name: stg_average_salary_by_municipality
+    columns:
+      - name: municipality_year_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: avg_net_salary
+        tests:
+          - not_null
+      - name: year_year
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null
+
+  - name: stg_housing_stock
+    description: Evolution of nb of principal, secondary and vacant houses by municipality and year (over 50 years, every 7-8 years)
+    columns:
+      - name: municipality_year_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: year_year
+        tests:
+          - not_null
+      - name: nb_principal_home
+        tests:
+          - not_null
+      - name: nb_second_home
+        tests:
+          - not_null
+      - name: nb_vacants_home
+        tests:
+          - not_null
+      - name: nb_tot_home
+        description: addition of principal, second and vacants home
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null        
+
+  - name: stg_population_by_municipality
+    description: Evolution of population from 1968 to 2019 (with 19 years)
+    columns:
+      - name: municipality_year_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: year_year
+        tests:
+          - not_null
+      - name: nb_population
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null
