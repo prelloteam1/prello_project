@@ -1,10 +1,11 @@
 SELECT
+    CONCAT(latitude,"-",longitude) as geographic_id,
     poi,
     name,
     latitude,
     longitude,
     municipality_code,
     importance,
-    name_reprocessed
+    LOWER(name_reprocessed) as name_reprocessed
 FROM 
     prello_project.POI_touristic_sites_by_municipality
