@@ -1,5 +1,5 @@
 SELECT
-    CONCAT(latitude, "-", longitude) AS geographic_id,
+    CONCAT(latitude, "_", longitude) AS geographic_id,
     poi,
     name,
     latitude,

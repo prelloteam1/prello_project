@@ -4,12 +4,12 @@
 
 -- Identify duplicates rows
 WITH uniques AS (select distinct
-    concat(sales_date, "-", latitude, "-", longitude) as primary_key
+    concat(sales_date, "_", latitude, "_", longitude) as primary_key
 from prello_project.notary_real_estate_sales), 
 
 bases AS (
 SELECT 
-concat(sales_date, "-", latitude, "-", longitude) as primary_key,
+concat(sales_date, "_", latitude, "_", longitude) as primary_key,
 * 
 from prello_project.notary_real_estate_sales )
 
