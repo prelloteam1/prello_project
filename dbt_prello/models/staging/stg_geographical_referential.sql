@@ -5,7 +5,7 @@ SELECT
     municipality_type,
     latitude,
     longitude,
-    department_code,
+    CAST(department_code AS FLOAT) AS department_code,
     epci_code,
     country_code,
     department_name
