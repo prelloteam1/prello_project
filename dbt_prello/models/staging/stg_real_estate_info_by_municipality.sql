@@ -1,3 +1,7 @@
+{{ config(
+    materialized='table')}}
+
+
 SELECT
     municipality_code,
     intensite_tension_immo,
