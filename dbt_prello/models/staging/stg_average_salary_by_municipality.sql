@@ -1,5 +1,5 @@
 SELECT 
-    CONCAT(municipality_code,"-", year) AS municipality_year_id,
+    CONCAT(municipality_code,"-", average_salary_by_municipality.year) AS municipality_year_id,
     municipality_code,
     avg_net_salary,
     year AS year_year,
