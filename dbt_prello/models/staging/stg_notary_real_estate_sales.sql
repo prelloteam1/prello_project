@@ -1,6 +1,3 @@
-{{ config(
-    materialized='table'
-)}}
 
 -- Identify duplicates rows
 WITH uniques AS (select distinct
