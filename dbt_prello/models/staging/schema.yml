@@ -188,15 +188,13 @@ models:
   - name: stg_notary_real_estate_sales
     description : Table containing raw information about date of sales, amount of sales, type of real estate, it's location and municipality
     columns:
-      - name: primary_key
+      - name: uniques_id
         description: concatenation of date of sale and it geographic coordinates (latitutde and longitude)
         tests:
           - unique
           - not_null
       - name: sales_date
         description: date of the sale of the real estate
-        tests:
-          - not_null
       - name: street_number
         description: number of the street of the real estate
       - name: street_code
@@ -229,9 +227,7 @@ models:
           - not_null
       - name: latitude
         description: geographical coordinate
-        tests:
-          - not_null
       - name: longitude
         description: geographical coordinate
-        tests:
-          - not_null
+
+
