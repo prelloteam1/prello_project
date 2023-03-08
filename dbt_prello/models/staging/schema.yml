@@ -235,3 +235,45 @@ models:
         description: geographical coordinate
         tests:
           - not_null
+  
+  - name: stg_real_estate_by_municipality
+    description : Table containing raw information about intensity tension of municipality, amount of rental med, minimum & maximum amount of rental per municipality
+    columns:
+      - name: municipality_code
+        description: unique id of each municipality in France
+        tests:
+          - not_null
+      - name: intensite_tension_immo
+        description: housing stress indice : indicator of balance of rental in the municipality. Higher it is, harder it is to find a rental for people.
+      - name: rental_max_apartment
+        description: rental apartment maximum price per square meter
+        tests:
+          - not_null
+      - name: rental_min_apartment
+        description: rental apartment minimum price per square meter
+        tests:
+          - not_null
+      - name: rental_med_house
+        description: rental house median price per square meter
+        tests:
+          - not_null
+      - name: rental_max_house
+        description: rental house maximum price per square meter
+        tests:
+          - not_null
+      - name: rental_min_house
+        description: rental house minimum price per square meter
+        tests:
+          - not_null
+      - name: rental_med_all
+        description: rental median price per square meter
+        tests:
+          - not_null
+      - name: rental_max_all
+        description: rental maximum price per square meter
+        tests:
+          - not_null
+      - name: rental_min_all
+        description: rental minimum price per square meter
+        tests:
+          - not_null
