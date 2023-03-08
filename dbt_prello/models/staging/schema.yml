@@ -244,7 +244,7 @@ models:
         tests:
           - not_null
       - name: intensite_tension_immo
-        description: housing stress indice : indicator of balance of rental in the municipality. Higher it is, harder it is to find a rental for people.
+        description: housing stress indice , indicator of balance of rental in the municipality. Higher it is, harder it is to find a rental for people.
       - name: rental_max_apartment
         description: rental apartment maximum price per square meter
         tests:
