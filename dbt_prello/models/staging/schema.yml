@@ -131,7 +131,7 @@ models:
     description: Evolution of nb of principal, secondary and vacant houses by municipality and year (over 50 years, every 7-8 years)
     columns:
       - name: municipality_year_id
-        description: Primary key
+        description: Primary_key
         tests:
           - unique
           - not_null
@@ -229,3 +229,8 @@ models:
         description: geographical coordinate
         tests:
           - not_null
+  - name: stg_test_notary_table
+    description : Test
+    tests:
+      - unique:
+          column_name: "(sales_date || '_' || latitude || '_' || longitude ||'_' || sales_price_m2)"
