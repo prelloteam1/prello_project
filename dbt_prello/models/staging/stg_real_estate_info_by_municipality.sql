@@ -3,7 +3,7 @@
 
 
 SELECT
-    municipality_code,
+    CAST(municipality_code AS INTEGER) AS municipality_code,
     intensite_tension_immo,
     rental_max_apartment,
     rental_min_apartment,
