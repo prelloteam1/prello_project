@@ -229,10 +229,6 @@ models:
         description: geographical coordinate
       - name: longitude
         description: geographical coordinate
-
-
-
-
         tests:
           - not_null
   
@@ -277,4 +273,3 @@ models:
         description: rental minimum price per square meter
         tests:
           - not_null
-
