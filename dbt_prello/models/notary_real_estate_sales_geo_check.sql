@@ -13,9 +13,9 @@ SELECT
     n.sales_price_m2,
     p.latitude,
     p.longitude,
-    LEFT(municipality_code,2) AS department_code
+    LEFT(n.municipality_code,2) AS department_code
 
-FROM    {{ ref ('stg_notary_real_estate_sales')}} n 
+FROM  {{ ref ('stg_notary_real_estate_sales')}} n 
 LEFT JOIN {{ ref ('stg_geographical_referential')}} p 
 ON n.municipality_code = p.municipality_code
 
