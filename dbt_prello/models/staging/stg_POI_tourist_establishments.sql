@@ -4,7 +4,7 @@ SELECT
     name,
     latitude,
     longitude,
-    CAST(municipality_code AS INTEGER) AS municipality_code,
+    municipality_code,
     importance,
     LOWER(name_reprocessed) AS name_reprocessed
 FROM

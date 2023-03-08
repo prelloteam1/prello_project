@@ -1,6 +1,6 @@
 SELECT
     int64_field_0 AS municipality_year_id,
-    CAST(municipality_code AS INTEGER) AS municipality_code,
+    municipality_code,
     year AS year_year,
     nb_principal_home,
     nb_second_home,
