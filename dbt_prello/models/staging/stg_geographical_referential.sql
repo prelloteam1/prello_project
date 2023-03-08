@@ -1,5 +1,5 @@
 SELECT
-    municipality_code,
+    CAST(municipality_code AS INTEGER) AS municipality_code,
     city_name,
     city_name_normalized,
     municipality_type,

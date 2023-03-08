@@ -21,7 +21,7 @@ SELECT
     street_code,
     street_name,
     nom_commune,
-    municipality_code,
+    CAST(municipality_code AS INTEGER) AS municipality_code,
     premise_type,
     surface,
     number_of_principal_rooms,
