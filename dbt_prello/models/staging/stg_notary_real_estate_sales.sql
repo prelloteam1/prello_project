@@ -1,7 +1,7 @@
 
 SELECT
     uniques_id,
-    PARSE_DATE("%Y",CAST(year AS STRING)) as sales_date,
+    CAST(sales_date AS DATE) as sales_date,
     sales_amount,
     street_number,
     street_code,
