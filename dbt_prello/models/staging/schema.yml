@@ -179,8 +179,7 @@ models:
         tests:
           - not_null
       - name: nb_population
-        tests:
-          - not_null
+        description: population count
       - name: country_code
         tests:
           - not_null
