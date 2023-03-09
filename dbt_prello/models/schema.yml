@@ -1,0 +1,48 @@
+version: 2
+
+models
+  - name: POI_tourist_establishments
+    description: Etablissements de nuitées (Hotel, Camping, Guest-house et auberge), avec indicateurs de département, d'EPCI et de population par municipalité  
+    columns: 
+      - name: geographic_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: poi
+        description: Type of establishments (moins les bed_and_breakfast)
+        tests:
+          - not_null
+      - name: name
+        description: Name of the establishments
+        tests:
+          - not_null
+      - name: latitude 
+        tests:
+          - not_null
+      - name: longitude
+        tests:
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: importance
+        description: To define
+        tests:
+          - not_null
+      - name: name_reprocessed
+        description: Column name reprocessed with lower and without the poi
+        tests:
+          - not_null
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: epci_code
+        description: epci_code of municipalities joined from geographical_referential
+        tests:
+          - not_null
+      - name: nb_population
+        description: population in 2019 for each municipality, joined from population_by_municipality
+        tests:
+          - not_null
