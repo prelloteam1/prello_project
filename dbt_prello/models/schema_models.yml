@@ -102,6 +102,18 @@ models:
         description: population in 2019 for each municipality, joined from population_by_municipality
         tests:
           - not_null
+      - name: nb_estab_dpt
+        description: nb establishment for each department
+        tests:
+          - not_null
+      - name: nb_estab_mun
+        description: nb establishment for each municipality
+        tests:
+          - not_null
+      - name: nb_estab_epci
+        description: nb establishment for each epci
+        tests:
+          - not_null
 
   - name: POI_touristic_sites_by_municipality
     description: Table containing the information of touristic sites and the kpis
