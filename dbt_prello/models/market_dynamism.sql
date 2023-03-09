@@ -30,13 +30,14 @@ GROUP BY
 
 --- Query 
 SELECT 
-    s.municipality_code,
-    s.epci_code,
-    s.department_code,
-    s.nb_ventes,
-    r.nb_reference,
-    s.latitude,
-    s.longitude,
+    s.municipality_code as municipality_code,
+    s.epci_code as epci_code,
+    s.department_code as department_code,
+    s.nb_ventes as nb_ventes,
+    r.nb_reference as nb_reference,
+    s.latitude as latitude,
+    s.longitude as longitude,
+    ---- Express market_dynamism the highest, the more the market is open, the least the market is completely locked
     SAFE_DIVIDE(s.nb_ventes,r.nb_reference) AS market_dynamism,
     ---- Express market_dynamism on a scale from 0 to 1 | 0.06424697538589905 corresponding to the max value
     SAFE_DIVIDE(s.nb_ventes,r.nb_reference)/0.06424697538589905 AS market_dynamism_normalized
