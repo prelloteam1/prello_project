@@ -18,7 +18,7 @@ models:
         tests:
           - not_null
       - name: latitude 
-        tests:
+              tests:
           - not_null
       - name: longitude
         tests:
@@ -44,3 +44,51 @@ models:
         description: population in 2019 for each municipality, joined from population_by_municipality
         tests:
           - not_null
+
+  - name: POI_touristic_sites_by_municipality
+    description: Table containing the information of touristic sites and the kpis
+    columns:
+      - name: geographic_id
+        description : Primary key of the table / concatenation of latitude & longitude 
+        tests : 
+          - not_null 
+          - unique 
+      - name: poi
+        description : >
+          Type of establishments could be: 
+          An integer 1 / 2 (need further investigation)
+          Or a string hotel / casino / beach / etc.. 
+        tests : 
+          - not_null 
+      - name: name 
+        tests : 
+          - not_null 
+      - name: latitude
+        tests : 
+          - not_null 
+      - name: importance
+        description : a metric that translate the importance of specific touristic site 
+        tests : 
+          - not_null 
+      - name: name_reprocessed
+        tests : 
+          - not_null 
+      - name: department_code
+        tests : 
+          - not_null       
+      - name: poi_category
+        description: new categories to group the poi
+        tests : 
+          - not_null 
+      - name: epci_code
+        description: added with a left join from the table geographical referential    
+      - name: poi_notation
+        description: a notation of all the poi categories (0, 2, 4, 6) by order of attractiveness
+      - name: nb_sites_by_department
+        description: sum of all the touristic sites by department
+      - name: nb_sites_by_epci
+        description: sum of all the touristic sites by epci code
+      - name: attrativeness_by_department
+        description: sum of all the notes of poi_notation to calculate the attrativeness by department
+      - name: attrativeness_by
+        description: sum of all the notes of poi_notation to calculate the attrativeness by department
