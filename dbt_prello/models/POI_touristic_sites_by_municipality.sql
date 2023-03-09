@@ -52,6 +52,6 @@ SELECT
     *,
     COUNT(DISTINCT name) OVER(PARTITION BY department_code) AS nb_sites_by_department,
     COUNT(DISTINCT name) OVER(PARTITION BY epci_code) AS nb_sites_by_epci,
-    SUM(poi_notation) OVER(PARTITION BY department_code) AS attrativeness_by_department,
+    SUM(poi_notation) OVER(PARTITION BY department_code) AS attractiveness_by_department,
     SUM(poi_notation) OVER(PARTITION BY epci_code) AS attrativeness_by_epci
 FROM POI_category

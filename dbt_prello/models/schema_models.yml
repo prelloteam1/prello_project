@@ -160,8 +160,19 @@ models:
         description: sum of all the touristic sites by epci code
       - name: attrativeness_by_department
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
-      - name: attrativeness_by
+      - name: attrativeness_by_epci
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
+
+  - name: ratio_touristic_sites
+    description: calculate the kpis of POI_touristic_sites
+    columns:
+      - name: department_code
+      - name: epci_code
+      - name: municipality_code
+      - name: nb_touristic_sites
+        description: sum of all the touristic sites
+      - name: attractiveness
+        description: sum of all the notes of poi_notation to calculate the attrativeness
 
   - name: market_dynamism
     description: Table containing the information about the dynamism of the market, for each municipality, agglomeration and department
@@ -215,3 +226,4 @@ models:
         description : Indicateur permettant de savoir la répartition des biens (près de 0 que du principal | au dessus de 1 plus de secondaire que principal)
       - name: secondary_home_rate
         description : Indicateur permettant de savoir la proportion de maison secondaire sur la proportion
+
