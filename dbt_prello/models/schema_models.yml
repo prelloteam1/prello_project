@@ -162,3 +162,56 @@ models:
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
       - name: attrativeness_by
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
+
+  - name: market_dynamism
+    description: Table containing the information about the dynamism of the market, for each municipality, agglomeration and department
+    columns:
+      - name: municipality_code
+        description : Primary key of the table 
+      - name: epci_code
+        description : Code of the agglomeration (unique per agglomeration)
+      - name: department_code
+        description : Code of the department (unique per department)
+      - name: latitude
+        description : latitude
+      - name: longitude
+        description : longitude
+      - name: nb_ventes
+        description : Number of housing sell 
+      - name: nb_reference 
+        description : Number of housing per city / agglomeration / department (primary home / secondary home / vacant home)     
+      - name: market_dynamism
+        description: >
+          Express market_dynamism:
+          the highest the more the market is open (high number of selling in comparison of the total housing)
+          the lowest the market is completely locked (low number of selling in comparison of the total housing)
+      - name: market_dynamism_normalized
+        description: Express market_dynamism on a scale from 0 to 1 
+
+  - name: occupation_rate_repartition_secondary_house
+    description: Table containing the information about the occupation rate and the repartition of secondary housing, for each municipality, agglomeration and department
+    columns:
+      - name: municipality_code
+        description : Primary key of the table 
+      - name: epci_code
+        description : Code of the agglomeration (unique per agglomeration)
+      - name: department_code
+        description : Code of the department (unique per department)
+      - name: latitude
+        description : latitude
+      - name: longitude
+        description : longitude
+      - name: nb_principal_home
+        description : Number of principal housing
+      - name: nb_second_home 
+        description : Number of secondary housing
+      - name: nb_vacants_home
+        description : Number of vacants housing
+      - name: nb_tot_home
+        description : Number of vacants housing
+      - name: occupation_rate
+        description : Indicateur permettant de savoir le taux d'occupation des housing
+      - name: housing_repartition
+        description : Indicateur permettant de savoir la répartition des biens (près de 0 que du principal | au dessus de 1 plus de secondaire que principal)
+      - name: secondary_home_rate
+        description : Indicateur permettant de savoir la proportion de maison secondaire sur la proportion
