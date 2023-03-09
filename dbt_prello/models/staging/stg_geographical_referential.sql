@@ -6,7 +6,7 @@ SELECT
     latitude,
     longitude,
     department_code,
-    epci_code,
+    CAST(epci_code AS STRING) AS epci_code,
     country_code,
     department_name
 FROM   
