@@ -1,8 +1,8 @@
 SELECT
     CONCAT(latitude,"_",longitude,"_",name) as geographic_id,
     CASE
-        WHEN poi = "1" THEN "world heritage"
-        WHEN poi = "2" THEN "historic monument"
+        WHEN poi = "1" THEN "world_heritage"
+        WHEN poi = "2" THEN "historic_monument"
         ELSE poi
     END AS poi,
     name,
