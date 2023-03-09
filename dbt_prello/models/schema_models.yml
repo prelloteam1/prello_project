@@ -18,7 +18,7 @@ models:
         tests:
           - not_null
       - name: latitude 
-              tests:
+        tests:
           - not_null
       - name: longitude
         tests:
