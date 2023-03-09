@@ -37,8 +37,5 @@ SUM(p.nb_population) AS population
 FROM
     establishments e
     LEFT JOIN population p USING(municipality_code)
-WHERE 
-e.department_code = "48"
-
 GROUP BY 
 1,2,3
