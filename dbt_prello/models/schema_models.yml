@@ -151,9 +151,7 @@ models:
         tests : 
           - not_null 
       - name: epci_code
-        description: added with a left join from the table geographical referential
-        tests:
-          - not_null    
+        description: added with a left join from the table geographical referential  
       - name: poi_notation
         description: a notation of all the poi categories (0, 2, 4, 6) by order of attractiveness
       - name: nb_sites_by_department
@@ -164,4 +162,3 @@ models:
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
       - name: attrativeness_by
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
-

@@ -1,4 +1,3 @@
-
 SELECT 
     n.sales_date,
     n.sales_amount,
