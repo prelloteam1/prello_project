@@ -160,5 +160,16 @@ models:
         description: sum of all the touristic sites by epci code
       - name: attrativeness_by_department
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
-      - name: attrativeness_by
+      - name: attrativeness_by_epci
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
+
+  - name: ratio_touristic_sites
+    description: calculate the kpis of POI_touristic_sites
+    columns:
+      - name: department_code
+      - name: epci_code
+      - name: municipality_code
+      - name: nb_touristic_sites
+        description: sum of all the touristic sites
+      - name: attractiveness
+        description: sum of all the notes of poi_notation to calculate the attrativeness
