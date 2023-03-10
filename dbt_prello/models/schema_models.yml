@@ -260,4 +260,29 @@ models:
         tests:
           - not_null
 
-          
+  - name: ranking_sales
+    description: ranking number of sales per year and municipality with some aggregation on average sale price per square meter, number of sales, sum of total amount sold.
+    columns: 
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+
+      - name: department_name
+        description: name of department in France
+
+      - name: nom_commune
+        description: name of town in France
+
+      - name: municipality_code
+        description: code of each town in France
+
+      - name: year_year
+        description: year extracted from sales_date
+
+      - name: sum_total_sales_amount
+        description: sum of sales_amount by municipality and year
+
+      - name: nb_sales
+        description: count nb of sales by municipality and year
+
+      - name: avg_sales_price_m2
+        description: avg sale price per square meter per municipality

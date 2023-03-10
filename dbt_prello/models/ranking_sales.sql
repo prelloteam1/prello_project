@@ -12,4 +12,4 @@ SELECT
 FROM  {{ ref ('stg_notary_real_estate_sales')}} n 
     LEFT JOIN {{ ref ('stg_geographical_referential')}} p ON n.municipality_code = p.municipality_code
 GROUP BY department_code,department_name, nom_commune,  municipality_code, year_year
-ORDER BY 1 DESC, 2 DESC
+ORDER BY 6 DESC, 7 DESC
