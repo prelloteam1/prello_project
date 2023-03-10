@@ -5,10 +5,11 @@ SELECT
     h.housing_repartition,
     h.secondary_home_rate,
     p.profitability,
+    p.normalized_profitability,
     r.nb_establishment,
     r.population,
-    t.nb_touristic_sites,
-    t.attractiveness
+    t.attractiveness_rank,
+    t.normalisation_attractiveness
     
 FROM 
     {{ ref ('market_dynamism') }} m
