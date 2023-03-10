@@ -12,8 +12,8 @@ SELECT
     SAFE_DIVIDE(SUM(nb_principal_home + nb_second_home),SUM(nb_principal_home + nb_second_home + nb_vacants_home)) AS occupation_rate,
     --- Indicateur permettant de savoir la répartition des biens (près de 0 que du principal | au dessus de 1 plus de secondaire que principal)
     SAFE_DIVIDE(SUM(nb_second_home),SUM(nb_principal_home)) AS housing_repartition,
-    --- Indicateur permettant de savoir la proportion de maison secondaire sur la proportion 
-    SAFE_DIVIDE(SUM(nb_second_home),SUM(nb_principal_home)) AS secondary_home_rate
+    --- Indicateur permettant de savoir la proportion de maison secondaire sur la proportion totale
+    SAFE_DIVIDE(SUM(nb_second_home),SUM(nb_principal_home + nb_second_home + nb_vacants_home)) AS secondary_home_rate
 
 FROM 
     {{ ref ('stg_housing_stock')}} h 
