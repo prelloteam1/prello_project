@@ -11,6 +11,7 @@ with avg_price_m2 as (
         AVG(a.sales_price_m2) as avg_sales_price_m2
         ,p.department_code
         ,a.municipality_code
+        ,p.department_name
         ,p.epci_code
         ,p.latitude
         ,p.longitude
@@ -18,7 +19,7 @@ with avg_price_m2 as (
         LEFT JOIN {{ ref ('stg_geographical_referential')}} p 
         USING (municipality_code)
     group by
-    2,3,4,5,6
+    2,3,4,5,6,7
 ),
 -- selecting average rent per municipality and epci_code
 rent as (
@@ -26,19 +27,24 @@ rent as (
         AVG(b.rental_med_all) as avg_rent_all
         ,p.municipality_code
         ,p.department_code
+        ,p.department_name
         ,p.epci_code
         ,p.latitude
         ,p.longitude
     from {{ ref ('stg_real_estate_info_by_municipality')}} b
         LEFT JOIN {{ ref ('stg_geographical_referential')}} p USING (municipality_code)
-    group by 2,3,4,5,6
+    group by 2,3,4,5,6,7
 )
 
 select 
+-- add profitability
         SAFE_DIVIDE(p.avg_sales_price_m2,rent.avg_rent_all) as profitability
+-- add normalized profitabilty
+       ,SAFE_DIVIDE(p.avg_sales_price_m2,rent.avg_rent_all)/1090.9207324881547 as normalized_profitability
        ,p.municipality_code
        ,p.epci_code
        ,p.department_code
+       ,p.department_name
        ,p.latitude
        ,p.longitude
 from avg_price_m2 p 
