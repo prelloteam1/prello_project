@@ -29,7 +29,8 @@ WITH POI_touristic_sites_category AS (
 POI_touristic_sites_by_municipality AS (
     SELECT
         t.*,
-        g.epci_code
+        g.epci_code,
+        g.department_name
     FROM POI_touristic_sites_category t
     LEFT JOIN {{ref('stg_geographical_referential')}} g ON t.municipality_code = g.municipality_code
 ),
