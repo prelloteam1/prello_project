@@ -237,6 +237,11 @@ models:
       - name: epci_code
         description: epci_code of municipalities joined from geographical_referential
       - name: municipality_code
+        description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
+        tests:
+          - not_null
+      - name: dpt_city_name
+        description: CONCAT department number and city name
         tests:
           - not_null
       - name: nb_establishment
