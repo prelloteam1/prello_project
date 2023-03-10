@@ -13,4 +13,4 @@ select
 from {{ ref ('stg_average_salary_by_municipality')}} a
     LEFT JOIN {{ ref ('stg_geographical_referential')}} g ON a.municipality_code = g.municipality_code
 
-GROUP BY year_year, department_code, epci_code, g.department_name
+GROUP BY year_year, department_code, g.department_name, epci_code, 

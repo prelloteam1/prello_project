@@ -2,74 +2,6 @@ version: 2
 
 models:
 
-  - name: geographical_referential.sql
-    description : table of reference for every geographical information of every city in France
-    columns:
-      - name: municipality_code
-        description : code of each municipality/city in France
-
-      - name: city_name
-        description : name of city in France
-
-      - name: city_name_normalized
-        description : upper name for every city name
-
-      - name: municipality_type
-        description : type municipality which is a city and "arrondissement" which is part of a big city
-
-      - name: latitude
-        description : latitude coordinate of municipality
-
-      - name: longitude
-        description : longitude coordinate of municipality
-
-      - name: department_code
-        description : every department code in France
-
-      - name: epci_code
-        description : code to gather agglomeration
-
-      - name: country_code
-        description : code of department
-
-      - name: department_name
-        description : name of the department
-        
-  - name: profitability_m2.sql
-    description : calculation of profitability of each city in term of investment over avg rent per square meter
-    columns:
-      - name: profitability
-        description : safe divide of price per square meter and avg rent per square meter
-        
-      - name: normalized_profitability
-        description : >
-          Safe divide of price per square meter and avg rent per square meter normalized over maximum of profitability existing. 
-          The highest is the profitability, better it is close to 1. 
-          Lowest is the profitability, better this indicator is close to 0
-        
-
-      - name: municipality_code
-        description : code of each municipality/city in France
-
-      - name: epci_code
-        description : code of agglomeration
-
-      - name: department_code
-        description : code of department
-            
-
-      - name: department_name
-        description : code of department
-        
-      - name: municipality_type
-        description : type municipality which is a city and "arrondissement" which is part of a big city
-
-      - name: latitude
-        description : latitude coordinate of municipality
-
-      - name: longitude
-        description : longitude coordinate of municipality
-
   - name: POI_tourist_establishments
     description: Etablissements de nuitées (Hotel, Camping, Guest-house et auberge), avec indicateurs de département, d'EPCI et de population par municipalité  
     columns: 
@@ -174,17 +106,94 @@ models:
       - name: attrativeness_by_epci
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
 
-  - name: ratio_touristic_sites
-    description: calculate the kpis of POI_touristic_sites
+  - name: average_salary_by_municipality
     columns:
-      - name: nb_touristic_sites
-        description: sum of all the touristic sites
-      - name: attractiveness
-        description: sum of all the notes of poi_notation to calculate the attrativeness
-      - name: attractiveness_score
-        description: we multiply the nb_tourstic_sites and the attractiveness
-      - name: attractiveness_rank
-        description: gives a rank by the attractiveness_score
+      - name: municipality_year_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: avg_net_salary
+        tests:
+          - not_null
+      - name: year_year
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null
+
+  - name: evolution_avg_salary
+    description: table allowing to show averaging salary over municipality and year and departement
+    columns:
+      - name: avg_net_salary
+        description: averaging net salary per municipality/town
+      - name: year_year
+        description: year
+      - name: department_code
+        description: code of department
+      - name: department_name
+        description: name of department
+      - name: epci_code
+        description: epci code for each municipality in France. Representing agglomeration.
+
+  - name: geographical_referential.sql
+    description : table of reference for every geographical information of every city in France
+    columns:
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+      - name: city_name
+        description : name of city in France
+
+      - name: city_name_normalized
+        description : upper name for every city name
+
+      - name: municipality_type
+        description : type municipality which is a city and "arrondissement" which is part of a big city
+
+      - name: latitude
+        description : latitude coordinate of municipality
+
+      - name: longitude
+        description : longitude coordinate of municipality
+
+      - name: department_code
+        description : every department code in France
+
+      - name: epci_code
+        description : code to gather agglomeration
+
+      - name: country_code
+        description : code of department
+
+      - name: department_name
+        description : name of the department
+
+  - name: housing_stock.sql
+    description: Evolution of nb of principal, secondary and vacant houses by municipality and year (over 50 years, every 7-8 years)
+    columns:
+      - name: municipality_year_id
+        description: Primary key
+      - name: municipality_code
+      - name: year_year
+      - name: nb_principal_home
+      - name: nb_second_home
+      - name: nb_vacants_home
+      - name: nb_tot_home
+        description: addition of principal, second and vacants home
+      - name: country_code   
+      - name: principal_home_rate
+        description: percentage of principal home in a municipality
+      - name: secondary_home_rate
+        description: percentage of secondary home in a municipality
+      - name: vacants_housing_rate
+        description: percentage of vacant home in a municipality
+      - name : department_code
+        description : code of department
 
   - name: market_dynamism
     description: Table containing the information about the dynamism of the market, for each municipality, agglomeration and department
@@ -210,6 +219,79 @@ models:
           the lowest the market is completely locked (low number of selling in comparison of the total housing)
       - name: market_dynamism_normalized
         description: Express market_dynamism on a scale from 0 to 1 
+
+  - name: mergin_table.sql
+    description : aggregation of different KPI of the project to allow to visualize in looker easily. Theses KPI are at disposal in several tables.
+    columns:
+      - name: municipality_code
+        description : code of municipality
+      - name : epci_code
+        description : agglomeration code, grouping different municipality
+      - name : department_code
+        description : code of department
+      - name : nb_ventes
+        description : number of sales 
+      - name : nb_reference
+        description : Number of housing per city / agglomeration / department (primary home / secondary home / vacant home)  
+      - name : latitude
+        description : latitude coordinate
+      - name : longitude
+        description : longitude coordinate
+      - name : market_dynamism
+        description :  >
+          Express market_dynamism:
+          the highest the more the market is open (high number of selling in comparison of the total housing)
+          the lowest the market is completely locked (low number of selling in comparison of the total housing)
+      - name : market_dynamism_normalized
+        description : market_dynamism ranked between 0 and 1. All market_dynamism values divided by max value
+      - name : occupation_rate
+        description : rate of occupation over all existing real_estate
+      - name : housing_repartition
+        description : rate between secondary home and primary home
+      - name : secondary_home_rate
+        description : rate of secopndary home over total home existing
+      - name : profitability
+        description : show average number of months the investment is profitable thanks to rental. Calculation of rental price / price of square meter 
+      - name : normalized_profitability
+        description : normalized over max value of profitable number of months
+      - name : nb_establishment
+        description : nb of tourist establishment by municipality
+      - name : population
+        description : nb of population by municipality
+      - name : attractiveness_rank
+        description : calculated thanks to number of tourist establishment over population by municipality
+      - name : normalisation_attractiveness
+        description : normalized attractiveness by max attractiveness
+
+  - name: notary_real_estate_sales_geo_check
+    description : notary_real_estate_sales with gps coordinates updated
+    columns:
+      - name: sales_date
+        description : date of sales
+      - name: sales_amount
+        description : amount sales in euro
+      - name: street_number
+        description : number of street address
+      - name: street_code
+        description : code of street
+      - name: street_name
+        description : name of street
+      - name: municipality_code
+        description : code of municipality
+      - name: premise_type
+        description : type of housing
+      - name: surface
+        description : surface in square meter
+      - name: number_of_principal_rooms
+        description : number of rooms in the real estate sold
+      - name: sales_price_m2
+        description : price per square meter of real estate sold
+      - name: latitude
+        description : latitude coordinate
+      - name: longitude
+        description : longitude coordinate
+      - name: department_code
+        description : code of department
 
   - name: occupation_rate_repartition_secondary_house
     description: Table containing the information about the occupation rate and the repartition of secondary housing, for each municipality, agglomeration and department
@@ -239,27 +321,54 @@ models:
       - name: secondary_home_rate
         description : Indicateur permettant de savoir la proportion de maison secondaire sur la proportion
 
-  - name: ratio_establishment_by_population
-    description: KPI de la table POI_tourist_establishment avec filtrage département, d'EPCI et municipalité
-    columns: 
-      - name: department_code
-        description: department based on the 2 first characters of the municipality_code
-        tests:
-          - not_null
-      - name: epci_code
-        description: epci_code of municipalities joined from geographical_referential
+  - name: population_by_municipality
+    description: Evolution of population from 1968 to 2019 (with 19 years)
+    columns:
+      - name: municipality_year_id
+        description: Primary key
       - name: municipality_code
-        description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
-        tests:
-          - not_null
-      - name: dpt_city_name
-        description: CONCAT department number and city name
-      - name: nb_establishment
-        description: aggregation establishment number per munipality_code
-        tests:
-          - not_null
+      - name: year_year
       - name: nb_population
-        description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
+        description: population count
+      - name: country_code
+        description: code of department
+      - name: department_code
+        description: code of department
+
+  - name: profitability_m2.sql
+    description : calculation of profitability of each city in term of investment over avg rent per square meter
+    columns:
+      - name: profitability
+        description : safe divide of price per square meter and avg rent per square meter
+        
+      - name: normalized_profitability
+        description : >
+          Safe divide of price per square meter and avg rent per square meter normalized over maximum of profitability existing. 
+          The highest is the profitability, better it is close to 1. 
+          Lowest is the profitability, better this indicator is close to 0
+        
+
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+      - name: epci_code
+        description : code of agglomeration
+
+      - name: department_code
+        description : code of department
+            
+
+      - name: department_name
+        description : code of department
+        
+      - name: municipality_type
+        description : type municipality which is a city and "arrondissement" which is part of a big city
+
+      - name: latitude
+        description : latitude coordinate of municipality
+
+      - name: longitude
+        description : longitude coordinate of municipality
 
   - name: ranking_sales
     description: ranking number of sales per year and municipality with some aggregation on average sale price per square meter, number of sales, sum of total amount sold.
@@ -287,3 +396,76 @@ models:
 
       - name: avg_sales_price_m2
         description: avg sale price per square meter per municipality
+
+  - name: ratio_establishment_by_population
+    description: KPI de la table POI_tourist_establishment avec filtrage département, d'EPCI et municipalité
+    columns: 
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: epci_code
+        description: epci_code of municipalities joined from geographical_referential
+      - name: municipality_code
+        description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
+        tests:
+          - not_null
+      - name: dpt_city_name
+        description: CONCAT department number and city name
+      - name: nb_establishment
+        description: aggregation establishment number per munipality_code
+        tests:
+          - not_null
+      - name: nb_population
+        description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
+
+  - name: ratio_touristic_sites
+    description: calculate the kpis of POI_touristic_sites
+    columns:
+      - name: nb_touristic_sites
+        description: sum of all the touristic sites
+      - name: attractiveness
+        description: sum of all the notes of poi_notation to calculate the attrativeness
+      - name: attractiveness_score
+        description: we multiply the nb_tourstic_sites and the attractiveness
+      - name: attractiveness_rank
+        description: gives a rank by the attractiveness_score
+
+  - name: real_estate_by_municipality
+    description : Table containing raw information about intensity tension of municipality, amount of rental med, minimum & maximum amount of rental per municipality
+    columns:
+      - name: municipality_code
+        description: unique id of each municipality in France
+
+      - name: intensite_tension_immo
+        description: housing stress indice , indicator of balance of rental in the municipality. Higher it is, harder it is to find a rental for people.
+      - name: rental_max_apartment
+        description: rental apartment maximum price per square meter
+
+      - name: rental_min_apartment
+        description: rental apartment minimum price per square meter
+
+      - name: rental_med_house
+        description: rental house median price per square meter
+
+      - name: rental_max_house
+        description: rental house maximum price per square meter
+
+      - name: rental_min_house
+        description: rental house minimum price per square meter
+
+      - name: rental_med_all
+        description: rental median price per square meter
+
+      - name: rental_max_all
+        description: rental maximum price per square meter
+
+      - name: rental_min_all
+        description: rental minimum price per square meter
+
+      - name: department_code
+        description: code of department
+
+
+
+
