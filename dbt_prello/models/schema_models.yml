@@ -227,3 +227,25 @@ models:
       - name: secondary_home_rate
         description : Indicateur permettant de savoir la proportion de maison secondaire sur la proportion
 
+  - name: ratio_establishment_by_population
+    description: KPI de la table POI_tourist_establishment avec filtrage département, d'EPCI et municipalité
+    columns: 
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: epci_code
+        description: epci_code of municipalities joined from geographical_referential
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: nb_establishment
+        description: aggregation establishment number per munipality_code
+        tests:
+          - not_null
+      - name: nb_population
+        description: population in 2019 for each municipality_code joined from population_by_municipality
+        tests:
+          - not_null
+
+          
