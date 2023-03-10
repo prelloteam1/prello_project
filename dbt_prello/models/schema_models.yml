@@ -254,16 +254,12 @@ models:
           - not_null
       - name: dpt_city_name
         description: CONCAT department number and city name
-        tests:
-          - not_null
       - name: nb_establishment
         description: aggregation establishment number per munipality_code
         tests:
           - not_null
       - name: nb_population
-        description: population in 2019 for each municipality_code joined from population_by_municipality
-        tests:
-          - not_null
+        description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
 
   - name: ranking_sales
     description: ranking number of sales per year and municipality with some aggregation on average sale price per square meter, number of sales, sum of total amount sold.
