@@ -1,75 +1,6 @@
 version: 2
 
 models:
-
-  - name: geographical_referential.sql
-    description : table of reference for every geographical information of every city in France
-    columns:
-      - name: municipality_code
-        description : code of each municipality/city in France
-
-      - name: city_name
-        description : name of city in France
-
-      - name: city_name_normalized
-        description : upper name for every city name
-
-      - name: municipality_type
-        description : type municipality which is a city and "arrondissement" which is part of a big city
-
-      - name: latitude
-        description : latitude coordinate of municipality
-
-      - name: longitude
-        description : longitude coordinate of municipality
-
-      - name: department_code
-        description : every department code in France
-
-      - name: epci_code
-        description : code to gather agglomeration
-
-      - name: country_code
-        description : code of department
-
-      - name: department_name
-        description : name of the department
-        
-  - name: profitability_m2.sql
-    description : calculation of profitability of each city in term of investment over avg rent per square meter
-    columns:
-      - name: profitability
-        description : safe divide of price per square meter and avg rent per square meter
-        
-      - name: normalized_profitability
-        description : >
-          Safe divide of price per square meter and avg rent per square meter normalized over maximum of profitability existing. 
-          The highest is the profitability, better it is close to 1. 
-          Lowest is the profitability, better this indicator is close to 0
-        
-
-      - name: municipality_code
-        description : code of each municipality/city in France
-
-      - name: epci_code
-        description : code of agglomeration
-
-      - name: department_code
-        description : code of department
-            
-
-      - name: department_name
-        description : code of department
-        
-      - name: municipality_type
-        description : type municipality which is a city and "arrondissement" which is part of a big city
-
-      - name: latitude
-        description : latitude coordinate of municipality
-
-      - name: longitude
-        description : longitude coordinate of municipality
-
   - name: POI_tourist_establishments
     description: Etablissements de nuitées (Hotel, Camping, Guest-house et auberge), avec indicateurs de département, d'EPCI et de population par municipalité  
     columns: 
@@ -173,6 +104,127 @@ models:
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
       - name: attrativeness_by_epci
         description: sum of all the notes of poi_notation to calculate the attrativeness by department
+
+  - name: average_salary_by_municipality.sql
+    description : 
+    columns:
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+  - name: evolution_avg_salary.sql
+    description : 
+    columns:
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+  - name: geographical_referential.sql
+    description : table of reference for every geographical information of every city in France
+    columns:
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+      - name: city_name
+        description : name of city in France
+
+      - name: city_name_normalized
+        description : upper name for every city name
+
+      - name: municipality_type
+        description : type municipality which is a city and "arrondissement" which is part of a big city
+
+      - name: latitude
+        description : latitude coordinate of municipality
+
+      - name: longitude
+        description : longitude coordinate of municipality
+
+      - name: department_code
+        description : every department code in France
+
+      - name: epci_code
+        description : code to gather agglomeration
+
+      - name: country_code
+        description : code of department
+
+      - name: department_name
+        description : name of the department
+
+ - name: housing_stock
+    description: Evolution of nb of principal, secondary and vacant houses by municipality and year (over 50 years, every 7-8 years)
+    columns:
+      - name: municipality_year_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: municipality_code
+        tests:
+          - not_null
+      - name: year_year
+        tests:
+          - not_null
+      - name: nb_principal_home
+        tests:
+          - not_null
+      - name: nb_second_home
+        tests:
+          - not_null
+      - name: nb_vacants_home
+        tests:
+          - not_null
+      - name: nb_tot_home
+        description: addition of principal, second and vacants home
+        tests:
+          - not_null
+      - name: country_code
+        tests:
+          - not_null    
+      - name: principal_home_rate
+        description: percentage of principal home in a municipality
+      - name: secondary_home_rate
+        description: percentage of secondary home in a municipality
+      - name: vacants_housing_rate
+        description: percentage of vacant home in a municipality
+      - name: department_code
+        description: code of department 
+      - name: department_name
+        description: name of department 
+
+
+  - name: profitability_m2.sql
+    description : calculation of profitability of each city in term of investment over avg rent per square meter
+    columns:
+      - name: profitability
+        description : safe divide of price per square meter and avg rent per square meter
+        
+      - name: normalized_profitability
+        description : >
+          Safe divide of price per square meter and avg rent per square meter normalized over maximum of profitability existing. 
+          The highest is the profitability, better it is close to 1. 
+          Lowest is the profitability, better this indicator is close to 0
+        
+      - name: municipality_code
+        description : code of each municipality/city in France
+
+      - name: epci_code
+        description : code of agglomeration
+
+      - name: department_code
+        description : code of department
+            
+
+      - name: department_name
+        description : code of department
+        
+      - name: municipality_type
+        description : type municipality which is a city and "arrondissement" which is part of a big city
+
+      - name: latitude
+        description : latitude coordinate of municipality
+
+      - name: longitude
+        description : longitude coordinate of municipality
 
   - name: ratio_touristic_sites
     description: calculate the kpis of POI_touristic_sites
