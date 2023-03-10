@@ -166,13 +166,14 @@ models:
   - name: ratio_touristic_sites
     description: calculate the kpis of POI_touristic_sites
     columns:
-      - name: department_code
-      - name: epci_code
-      - name: municipality_code
       - name: nb_touristic_sites
         description: sum of all the touristic sites
       - name: attractiveness
         description: sum of all the notes of poi_notation to calculate the attrativeness
+      - name: attractiveness_score
+        description: we multiply the nb_tourstic_sites and the attractiveness
+      - name: attractiveness_rank
+        description: gives a rank by the attractiveness_score
 
   - name: market_dynamism
     description: Table containing the information about the dynamism of the market, for each municipality, agglomeration and department
