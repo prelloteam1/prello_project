@@ -39,7 +39,14 @@ models:
     description : calculation of profitability of each city in term of investment over avg rent per square meter
     columns:
       - name: profitability
-        description : safe divide of price per square meter and avg rent per square meter 
+        description : safe divide of price per square meter and avg rent per square meter
+        
+      - name: normalized_profitability
+        description : >
+          Safe divide of price per square meter and avg rent per square meter normalized over maximum of profitability existing. 
+          The highest is the profitability, better it is close to 1. 
+          Lowest is the profitability, better this indicator is close to 0
+        
 
       - name: municipality_code
         description : code of each municipality/city in France
@@ -49,7 +56,11 @@ models:
 
       - name: department_code
         description : code of department
+            
 
+      - name: department_name
+        description : code of department
+        
       - name: municipality_type
         description : type municipality which is a city and "arrondissement" which is part of a big city
 
@@ -166,13 +177,14 @@ models:
   - name: ratio_touristic_sites
     description: calculate the kpis of POI_touristic_sites
     columns:
-      - name: department_code
-      - name: epci_code
-      - name: municipality_code
       - name: nb_touristic_sites
         description: sum of all the touristic sites
       - name: attractiveness
         description: sum of all the notes of poi_notation to calculate the attrativeness
+      - name: attractiveness_score
+        description: we multiply the nb_tourstic_sites and the attractiveness
+      - name: attractiveness_rank
+        description: gives a rank by the attractiveness_score
 
   - name: market_dynamism
     description: Table containing the information about the dynamism of the market, for each municipality, agglomeration and department
