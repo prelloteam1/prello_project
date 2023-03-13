@@ -13,7 +13,8 @@ WITH department AS (
 epci AS (
     SELECT 
         po.*,
-        gr.epci_code
+        gr.epci_code,
+        gr.city_name
     FROM department AS po
     LEFT JOIN {{ ref ('stg_geographical_referential')}} AS gr ON po.municipality_code = gr.municipality_code),
 
