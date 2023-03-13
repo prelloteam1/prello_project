@@ -466,6 +466,27 @@ models:
       - name: department_code
         description: code of department
 
+<<<<<<< HEAD
+  - name: prello_base
+    description: annonces sur le sites de prello dans l'onglet nos propriétés
+    columns:
+      - name: title
+        description: type de biens avec une description rapide
+        tests:
+          - not_null
+      - name: price_one_eighth
+        description: prix pour 1/8 des parts du bien 
+        tests:
+          - not_null
+      - name: surface_m2
+        tests:
+          - not_null
+      - name: total_price
+        description: price_one_eighth * 8 pour obtenir le prix total des biens
+        tests:
+          - not_null
+          
+=======
   - name: POI_establishment-TOP100-15000
     description : Table containing top 100 of ratio_touristic_sites with municipalities > 15000
     columns:
@@ -519,3 +540,4 @@ models:
         description: SUM of population
       - name:  pop_per_est
         description: ratio population/establishment
+>>>>>>> 0a5d5d87ae00a74199e2f3d336c57204389aa6b2
