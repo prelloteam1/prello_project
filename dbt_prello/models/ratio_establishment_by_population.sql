@@ -28,17 +28,33 @@ FROM
     LEFT JOIN {{ ref ('stg_geographical_referential')}} g USING(municipality_code)
 GROUP BY
     1,2,3
-)
-
+),
+normalize AS (
 SELECT
 e.department_code,
 e.epci_code,
 e.municipality_code,
 p.dep_city_name,
 SUM(e.nb_hotel) AS nb_establishment,
-SUM(p.nb_population) AS population
+SUM(p.nb_population) AS population,
+SUM(p.nb_population)/SUM(e.nb_hotel) AS population_per_establishment
 FROM
     establishments e
     LEFT JOIN population p USING(municipality_code)
 GROUP BY 
 1,2,3,4
+)
+
+SELECT
+n.department_code,
+n.epci_code,
+n.municipality_code,
+n.dep_city_name,
+n.nb_establishment,
+n.population,
+n.population_per_establishment,
+1-ROUND(SAFE_DIVIDE(n.population,n.nb_establishment)/72376,5) AS normalized_ppe
+FROM
+    normalize n
+GROUP BY 
+1,2,3,4,5,6,7
