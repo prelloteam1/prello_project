@@ -6,6 +6,7 @@ WITH population AS (
 SELECT
     SUM(p.nb_population) as nb_population,
     LEFT(p.municipality_code,2) as department_code,
+    g.department_name,
     g.epci_code,
     CONCAT((LEFT(p.municipality_code,2)),'-', g.city_name) as dep_city_name,
     IF(p.municipality_code LIKE '75%', '75056', p.municipality_code) AS municipality_code,
@@ -15,11 +16,12 @@ FROM
 WHERE
     year_year = "2019-01-01"
 GROUP BY
-    2,3,4,5
+    2,3,4,5,6
 ),
 establishments AS (
 SELECT
     LEFT(e.municipality_code,2) as department_code,
+    g.department_name,
     e.municipality_code,
     g.epci_code,
     COUNT(DISTINCT(e.name)) AS nb_hotel
@@ -27,34 +29,38 @@ FROM
     {{ ref ('stg_POI_tourist_establishments')}} e
     LEFT JOIN {{ ref ('stg_geographical_referential')}} g USING(municipality_code)
 GROUP BY
-    1,2,3
+    1,2,3,4
 ),
 normalize AS (
 SELECT
-e.department_code,
-e.epci_code,
-e.municipality_code,
-p.dep_city_name,
-SUM(e.nb_hotel) AS nb_establishment,
-SUM(p.nb_population) AS population,
-SUM(p.nb_population)/SUM(e.nb_hotel) AS population_per_establishment
+    e.department_code,
+    e.department_name,
+    e.epci_code,
+    e.municipality_code,
+    p.dep_city_name,
+    SUM(e.nb_hotel) AS nb_establishment,
+    SUM(p.nb_population) AS population,
+    SUM(p.nb_population)/SUM(e.nb_hotel) AS population_per_establishment
 FROM
     establishments e
-    LEFT JOIN population p USING(municipality_code)
+LEFT JOIN population p USING(municipality_code)
 GROUP BY 
-1,2,3,4
+1,2,3,4,5
 )
 
 SELECT
-n.department_code,
-n.epci_code,
-n.municipality_code,
-n.dep_city_name,
-n.nb_establishment,
-n.population,
-n.population_per_establishment,
-1-ROUND(SAFE_DIVIDE(n.population,n.nb_establishment)/72376,5) AS normalized_ppe
+    n.department_code,
+    n.department_name,
+    n.epci_code,
+    n.municipality_code,
+    n.dep_city_name,
+    n.nb_establishment,
+    n.population,
+    n.population_per_establishment,
+    1-ROUND(SAFE_DIVIDE(n.population,n.nb_establishment)/6000,4) AS normalized_ppe
 FROM
     normalize n
+WHERE n.population_per_establishment <= 6000
 GROUP BY 
-1,2,3,4,5,6,7
+1,2,3,4,5,6,7,8
+ORDER BY population_per_establishment DESC
