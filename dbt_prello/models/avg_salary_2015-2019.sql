@@ -30,6 +30,7 @@ avg_salary_2019 as (
 
 select 
     SUM(SAFE_DIVIDE(avg_net_salary2019,avg_net_salary2015)-1)*100 as evo_percent_avg_salary,
+    SUM(avg_net_salary2019-avg_net_salary2015) as diff_value_salary,
     a.department_code,
     a.department_name
 from avg_salary_2019 a  

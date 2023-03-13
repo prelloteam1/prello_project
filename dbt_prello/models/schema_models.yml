@@ -140,6 +140,18 @@ models:
       - name: epci_code
         description: epci code for each municipality in France. Representing agglomeration.
 
+  - name: avg_salary_2015-2019
+    description: table calculating average salary by department between 2015 and 2019 
+    columns:
+      - name: evo_percent_avg_salary
+        description: evolution of salary by deparment between 2019 and 2015
+      - name: diff_value_salary
+        description: difference of value between salary of 2019 and 2015 per deparment
+      - name: department_code
+        description: code of department
+      - name: department_name
+        description: name of department
+
   - name: geographical_referential.sql
     description : table of reference for every geographical information of every city in France
     columns:
