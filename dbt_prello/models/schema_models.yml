@@ -466,6 +466,56 @@ models:
       - name: department_code
         description: code of department
 
+  - name: POI_establishment-TOP100-15000
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 15000
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_establishment
+        description: SUM of establishment
+      - name:  population
+        description: SUM of population
+      - name:  pop_per_est
+        description: ratio population/establishment
 
+  - name: POI_establishment-TOP100-5000
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 5000
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_establishment
+        description: SUM of establishment
+      - name:  population
+        description: SUM of population
+      - name:  pop_per_est
+        description: ratio population/establishment
 
-
+  - name: POI_establishment-TOP100-600
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 600
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_establishment
+        description: SUM of establishment
+      - name:  population
+        description: SUM of population
+      - name:  pop_per_est
+        description: ratio population/establishment
