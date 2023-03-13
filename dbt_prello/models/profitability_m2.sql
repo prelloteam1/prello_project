@@ -39,8 +39,9 @@ rent as (
 select 
 -- add profitability
         SAFE_DIVIDE(p.avg_sales_price_m2,rent.avg_rent_all) as profitability
--- add normalized profitabilty
-       ,SAFE_DIVIDE(p.avg_sales_price_m2,rent.avg_rent_all)/1090.9207324881547 as normalized_profitability
+-- add normalized profitabilty which is in between 0 and 1 : max value is 1090,... max number of months to pay
+-- here normalized profitability is 0 : minimum profitable over territory and 1 max profitable in France
+       ,1-SAFE_DIVIDE(p.avg_sales_price_m2,rent.avg_rent_all)/1090.9207324881547 as normalized_profitability
        ,p.municipality_code
        ,p.epci_code
        ,p.department_code
