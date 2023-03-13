@@ -9,7 +9,8 @@ SELECT
     r.nb_establishment,
     r.population,
     t.attractiveness_rank,
-    t.normalisation_attractiveness
+    t.normalisation_attractiveness,
+    tr.voyageurs AS has_train_station
     
 FROM 
     {{ ref ('market_dynamism') }} m
@@ -17,3 +18,5 @@ FROM
     LEFT JOIN {{ ref ('profitability_m2') }} p USING(municipality_code)
     LEFT JOIN {{ ref ('ratio_establishment_by_population') }} r USING(municipality_code)
     LEFT JOIN {{ ref ('ratio_touristic_sites') }} t USING(municipality_code)
+    LEFT JOIN {{ ref ('stg_train_station') }} tr USING(city_name_normalized) 
+
