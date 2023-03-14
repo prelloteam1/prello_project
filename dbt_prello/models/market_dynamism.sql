@@ -8,12 +8,13 @@ SELECT
     ,LEFT(h.municipality_code, 2) as department_code
     ,COUNT(DISTINCT s.uniques_id) as nb_ventes
     ,city_name_normalized
+    ,department_name
 FROM 
     {{ ref ('stg_housing_stock') }} h 
     LEFT JOIN {{ ref ('stg_notary_real_estate_sales') }} s USING(municipality_code)
     LEFT JOIN {{ ref ('stg_geographical_referential')}} g ON h.municipality_code = g.municipality_code
 GROUP BY 
-    5,2,1,7,4,3
+    5,2,1,7,8,4,3
 ),
 --- Nombre de reference (maison primaire + maison secondaire + maison vacante)
 reference AS (
@@ -32,6 +33,8 @@ GROUP BY
 --- Query 
 SELECT 
     s.city_name_normalized as city_name_normalized,
+    s.department_name as department_name,
+    "FRANCE" as country,
     s.municipality_code as municipality_code,
     s.epci_code as epci_code,
     s.department_code as department_code,
