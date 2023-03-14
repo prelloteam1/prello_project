@@ -13,7 +13,7 @@ WITH ratio_touristic_sites AS (
         p.nb_population,
         CONCAT(m.department_code,'-',m.city_name) AS dep_city_name,
         COUNT(DISTINCT m.name) AS nb_touristic_sites,
-        SUM(m.poi_notation) AS attractiveness, 
+        ROUND(SUM(m.poi_notation),2) AS attractiveness, 
         ROUND(SUM(poi_notation) / COUNT(DISTINCT m.name), 2) AS score_attractiveness,
     FROM {{ref('POI_touristic_sites_by_municipality')}} m
     LEFT JOIN {{ref('stg_population_by_municipality')}} p USING(municipality_code)
@@ -24,6 +24,6 @@ WITH ratio_touristic_sites AS (
 SELECT 
     *,
     DENSE_RANK() OVER(ORDER BY score_attractiveness DESC) AS attractiveness_rank,
-    SAFE_DIVIDE(score_attractiveness, 8) AS normalisation_attractiveness
+    ROUND(SAFE_DIVIDE(score_attractiveness, 8),2) AS normalisation_attractiveness
 FROM ratio_touristic_sites
 ORDER BY score_attractiveness DESC

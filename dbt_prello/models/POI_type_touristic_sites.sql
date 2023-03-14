@@ -57,6 +57,6 @@ SELECT
     s.nb_touristic_sites,
     s.attractiveness,
     s.score_attractiveness,
-    s.normalisation_attractiveness,
+    s.normalisation_attractiveness
 FROM POI_boolean b
 LEFT JOIN {{ref('ratio_touristic_sites')}} s ON s.municipality_code = b.municipality_code
