@@ -550,3 +550,11 @@ models:
         description: SUM of population
       - name:  pop_per_est
         description: ratio population/establishment
+
+  - name: POI_type_touristic_sites
+    description: Table containing the ratio of the touristic sites and the type of touristic sites
+    columns:
+      - name: department_code
+        tests:
+          - not_null
+          
