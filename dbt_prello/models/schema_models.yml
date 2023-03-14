@@ -428,20 +428,84 @@ models:
         description: aggregation establishment number per munipality_code
         tests:
           - not_null
-      - name: nb_population
+      - name: population
         description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
+      - name: population_per_establishment
+        description: population per establishment
+      - name: normalized_ppe
+        description: normalisation population per establishment
 
   - name: ratio_touristic_sites
     description: calculate the kpis of POI_touristic_sites
     columns:
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: department_name
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: epci_code
+        description: epci_code of municipalities joined from geographical_referential
+      - name: municipality_code
+        description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
+        tests:
+          - not_null
+      - name: nb_population 
+        description: from population by municipality table
+      - name: dpt_city_name
+        description: CONCAT department number and city name
       - name: nb_touristic_sites
         description: sum of all the touristic sites
       - name: attractiveness
         description: sum of all the notes of poi_notation to calculate the attrativeness
       - name: attractiveness_score
-        description: we multiply the nb_tourstic_sites and the attractiveness
+        description: we divide the attractiveness by the nb_tourstic_sites
       - name: attractiveness_rank
         description: gives a rank by the attractiveness_score
+      - name: normalisation_attractiveness
+        description: normalisation of attractiveness_score
+
+  - name: ratio_global_tourists
+    description: réunification des KPI des 2 tables ratio
+    columns: 
+      - name: department_code
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: department_name
+        description: department based on the 2 first characters of the municipality_code
+        tests:
+          - not_null
+      - name: epci_code
+        description: epci_code of municipalities joined from geographical_referential
+      - name: municipality_code
+        description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
+        tests:
+          - not_null
+      - name: dpt_city_name
+        description: CONCAT department number and city name
+      - name: nb_establishment
+        description: aggregation establishment number per munipality_code
+        tests:
+          - not_null
+      - name: population
+        description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
+      - name: population_per_establishment
+        description: population per establishment
+      - name: nb_touristic_sites
+        description: sum of all the touristic sites
+      - name: attractiveness
+        description: sum of all the notes of poi_notation to calculate the attrativeness
+      - name: score_attractiveness
+        description: we divide the attractiveness by the nb_tourstic_sites
+      - name: normalized_ppe
+        description: normalisation population per establishment
+      - name: normalisation_attractiveness
+        description: normalisation of attractiveness_score
+      - name: global_score
+        description: (normalisation establishment + normalisation touristic sites) / 2
 
   - name: real_estate_by_municipality
     description : Table containing raw information about intensity tension of municipality, amount of rental med, minimum & maximum amount of rental per municipality
@@ -514,6 +578,8 @@ models:
         description: SUM of population
       - name:  pop_per_est
         description: ratio population/establishment
+      - name:  normalized_ppe
+        description: normalisation population per establishment
 
   - name: POI_establishment-TOP100-5000
     description : Table containing top 100 of ratio_touristic_sites with municipalities > 5000
@@ -532,6 +598,8 @@ models:
         description: SUM of population
       - name:  pop_per_est
         description: ratio population/establishment
+      - name:  normalized_ppe
+        description: normalisation population per establishment
 
   - name: POI_establishment-TOP100-600
     description : Table containing top 100 of ratio_touristic_sites with municipalities > 600
@@ -550,3 +618,77 @@ models:
         description: SUM of population
       - name:  pop_per_est
         description: ratio population/establishment
+      - name:  normalized_ppe
+        description: normalisation population per establishment
+
+  - name: POI_touristic_sites-TOP100-15000
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 15000
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.department_name
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_touristic_sites
+        description: SUM of touristic sites
+      - name:  nb_population
+        description: SUM of population
+      - name:  attractiveness
+        description: SUM des notes des POI
+      - name:  score_attractiveness
+        description: SUM des notes des POI/nb de sites
+      - name:  normalisation_attractiveness
+        description: normalisation
+
+  - name: POI_touristic_sites-TOP100-5000
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 5000
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.department_name
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_touristic_sites
+        description: SUM of touristic sites
+      - name:  nb_population
+        description: SUM of population
+      - name:  attractiveness
+        description: SUM des notes des POI
+      - name:  score_attractiveness
+        description: SUM des notes des POI/nb de sites
+      - name:  normalisation_attractiveness
+        description: normalisation
+
+  - name: POI_touristic_sites-TOP100-600
+    description : Table containing top 100 of ratio_touristic_sites with municipalities > 600
+    columns:
+      - name:  p.department_code
+        description: department code
+      - name:  p.department_name
+        description: department code
+      - name:  p.epci_code
+        description: epci_code
+      - name:  p.municipality_code
+        description: municipality_code
+      - name:  p.dep_city_name
+        description: Concat of dep number + city name
+      - name:  nb_touristic_sites
+        description: SUM of touristic sites
+      - name:  nb_population
+        description: SUM of population
+      - name:  attractiveness
+        description: SUM des notes des POI
+      - name:  score_attractiveness
+        description: SUM des notes des POI/nb de sites
+      - name:  normalisation_attractiveness
+        description: normalisation
