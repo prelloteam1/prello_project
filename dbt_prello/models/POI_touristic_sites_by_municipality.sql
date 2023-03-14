@@ -41,7 +41,8 @@ POI_category AS (
     SELECT 
         *,
         CASE
-            WHEN REGEXP_CONTAINS(poi_category,'nature_mountain|historic_monument|beach|world_heritage') THEN 6
+            WHEN REGEXP_CONTAINS(poi_category,'nature_mountain|beach') THEN 8
+            WHEN REGEXP_CONTAINS(poi_category,'historic_monument|world_heritage') THEN 6
             WHEN REGEXP_CONTAINS(poi_category,'castle|culture|hobbies|nature_water|park_forest|vineyard') THEN 4
             WHEN REGEXP_CONTAINS(poi_category,'viewpoint') THEN 2
             ELSE 0
