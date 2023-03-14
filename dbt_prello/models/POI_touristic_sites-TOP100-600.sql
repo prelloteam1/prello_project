@@ -14,6 +14,6 @@ SELECT
     p.score_attractiveness,
     p.normalisation_attractiveness
 FROM  {{ ref ('ratio_touristic_sites')}} p
-WHERE p.nb_population >= 600
-ORDER BY 8 DESC
+WHERE p.nb_population >= 600 AND nb_touristic_sites >= 5
+ORDER BY 9 DESC
 LIMIT 100

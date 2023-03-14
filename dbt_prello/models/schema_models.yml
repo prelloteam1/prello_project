@@ -692,3 +692,11 @@ models:
         description: SUM des notes des POI/nb de sites
       - name:  normalisation_attractiveness
         description: normalisation
+
+  - name: POI_type_touristic_sites
+    description: Table containing the ratio of the touristic sites and the type of touristic sites
+    columns:
+      - name: department_code
+        tests:
+          - not_null
+          
