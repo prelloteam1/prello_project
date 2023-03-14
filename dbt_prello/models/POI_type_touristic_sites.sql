@@ -30,47 +30,33 @@ WITH POI_category AS(
 
 POI_boolean AS (
     SELECT
-        department_code,
-        municipality_code,
-        SUM(beach) AS beach,
-        SUM(nature_water) AS nature_water,
-        SUM(nature_mountain) AS nature_mountain,
-        SUM(park_forest) AS park_forest,
-        SUM(castle) AS castle,
-        SUM(historic_monument) AS historic_monument,
-        SUM(world_heritage) AS world_heritage,
-        SUM(culture) AS culture,
-        SUM(hobbies) AS hobbies,
-        SUM(vineyard) AS vineyard,
-        SUM(viewpoint) AS viewpoint,
-        SUM(other) AS other
-    FROM POI_category
-    GROUP BY department_code, municipality_code
+        s.department_code,
+        s.department_name,
+        s.municipality_code,
+        s.dep_city_name,
+        SUM(c.beach) AS beach,
+        SUM(c.nature_water) AS nature_water,
+        SUM(c.nature_mountain) AS nature_mountain,
+        SUM(c.park_forest) AS park_forest,
+        SUM(c.castle) AS castle,
+        SUM(c.historic_monument) AS historic_monument,
+        SUM(c.world_heritage) AS world_heritage,
+        SUM(c.culture) AS culture,
+        SUM(c.hobbies) AS hobbies,
+        SUM(c.vineyard) AS vineyard,
+        SUM(c.viewpoint) AS viewpoint,
+        SUM(c.other) AS other
+    FROM {{ref('ratio_touristic_sites')}} s
+    LEFT JOIN POI_category c ON s.municipality_code = c.municipality_code
+    GROUP BY department_code, department_name, municipality_code, dep_city_name
 )
 
-SELECT 
-    s.department_code,
-    s.department_name,
-    s.epci_code,
-    s.municipality_code,
-    s.dep_city_name,
+SELECT
+    b.*,
     s.nb_population, 
     s.nb_touristic_sites,
     s.attractiveness,
     s.score_attractiveness,
     s.normalisation_attractiveness,
-    b.beach,
-    b.nature_mountain,
-    b.nature_water,
-    b.park_forest,
-    b.castle,
-    b.historic_monument,
-    b.world_heritage,
-    b.culture,
-    b.hobbies,
-    b.vineyard,
-    b.viewpoint,
-    b.other
-FROM {{ref('ratio_touristic_sites')}} s 
-LEFT JOIN POI_boolean b ON s.municipality_code = b.municipality_code
-ORDER BY s.normalisation_attractiveness DESC
+FROM POI_boolean b
+LEFT JOIN {{ref('ratio_touristic_sites')}} s ON s.municipality_code = b.municipality_code
