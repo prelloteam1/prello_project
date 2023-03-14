@@ -55,7 +55,6 @@ SELECT
     s.municipality_code,
     s.dep_city_name,
     s.nb_population, 
-    s.dep_city_name,
     s.nb_touristic_sites,
     s.attractiveness,
     s.score_attractiveness,
