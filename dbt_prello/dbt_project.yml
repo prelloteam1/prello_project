@@ -36,3 +36,5 @@ models:
       materialized: table
       staging:
         schema: 'staging'
+        docs:
+          node_color: "#cd7f32"
