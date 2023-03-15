@@ -1,5 +1,6 @@
 {{ config(
-    materialized='table'
+    tags=["not_show"],
+    docs={'node_color': 'blue'}
 )}}
 
 SELECT

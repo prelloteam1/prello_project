@@ -1,6 +1,4 @@
-{{ config(
-    materialized='table'
-)}}
+
 
 WITH POI_category AS(
     SELECT

@@ -1,3 +1,9 @@
+{{ config(
+    tags=["no_use"],
+    docs={'node_color': 'red'}
+)}}
+
+
 SELECT 
     LEFT(n.municipality_code,2) AS department_code,
     p.department_name,

@@ -1,3 +1,10 @@
+
+{{ config(
+    tags=["no_use"],
+    docs={'node_color': 'red'}
+)}}
+
+
 SELECT 
     n.sales_date,
     n.sales_amount,

@@ -1,5 +1,6 @@
 {{ config(
-    materialized='table'
+    tags=["no_use"],
+    docs={'node_color': 'red'}
 )}}
 
 -- permettre d'afficher l'évolution du salaire moyen dans looker grouper par année, département
