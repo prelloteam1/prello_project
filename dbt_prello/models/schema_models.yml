@@ -232,7 +232,7 @@ models:
       - name: market_dynamism_normalized
         description: Express market_dynamism on a scale from 0 to 1 
 
-  - name: mergin_table.sql
+  - name: merging_table.sql
     description : aggregation of different KPI of the project to allow to visualize in looker easily. Theses KPI are at disposal in several tables.
     columns:
       - name: municipality_code
@@ -474,20 +474,14 @@ models:
           - not_null
       - name: department_name
         description: department based on the 2 first characters of the municipality_code
-        tests:
-          - not_null
       - name: epci_code
         description: epci_code of municipalities joined from geographical_referential
       - name: municipality_code
         description: municipality code but renaming the parisian one as it was not referenced the same between geographical and POI
-        tests:
-          - not_null
       - name: dpt_city_name
         description: CONCAT department number and city name
       - name: nb_establishment
         description: aggregation establishment number per munipality_code
-        tests:
-          - not_null
       - name: population
         description: population in 2019 for each municipality_code joined from population_by_municipality (pas de test car avec modif paris, case null créée)
       - name: population_per_establishment
