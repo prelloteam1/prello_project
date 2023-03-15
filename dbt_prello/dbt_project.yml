@@ -37,5 +37,12 @@ models:
       staging:
         schema: 'staging'
         +docs:
+          node_color: "#7e5835"
+      marts:
+        +docs:
+          node_color: "#19e000"
+      intermediate:
+        +docs:
           node_color: "#cd7f32"
+      
 
