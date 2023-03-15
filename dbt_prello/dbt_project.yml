@@ -36,12 +36,18 @@ models:
       materialized: table
       staging:
         schema: 'staging'
+        +tags:
+          - "staging"
         +docs:
           node_color: "#a3a3a3"
       marts:
+        +tags:
+          - "marts"
         +docs:
           node_color: "#19e000"
       intermediate:
+        +tags:
+          - "intermediate"
         +docs:
           node_color: "#fe8306"
       
